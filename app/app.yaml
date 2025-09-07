@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flask-apps
+  namespace: pymongo
+  labels:
+    app: flask-apps
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: flask-apps
+  template:
+    metadata:
+      labels:
+        app: flask-apps
+    spec:
+      containers:
+        - name: flask-apps
+          image: hehehangchha/flask-app:v5
+          ports:
+            - containerPort: 9999
+          env:
+            - name: MONGO_SERVICE
+              value: mongo-service
+            - name: MONGO_INITDB_ROOT_USERNAME
+              valueFrom:
+                configMapKeyRef:
+                  name: mongo-config
+                  key: mongo_username
+            - name: MONGO_INITDB_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mongo-secret
+                  key: mongo_password
+      
