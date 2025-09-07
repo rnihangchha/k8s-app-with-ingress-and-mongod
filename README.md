@@ -22,4 +22,3 @@
     └── templates
         └── index.html
 
-5 directories, 14 files
