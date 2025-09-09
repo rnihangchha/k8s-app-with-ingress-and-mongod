@@ -9,5 +9,5 @@ spec:
     storage: 2Gi
   accessModes:
     - ReadWriteOnce
-  hostPath:
+  hostPath:              # Mount the volume  ontop of node level; dealing with single node
     path: /mnt/data/db
